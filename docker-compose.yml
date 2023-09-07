@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    environment:
+      REGISTER_HOST: register
+    image: gateway
+    networks:
+      - microservices
+    ports:
+      - 5000:5000
+
+  register:
+    build:
+      context: .
+      dockerfile: register/Dockerfile
+    image: register
+    networks:
+      - microservices
+
+networks:
+  microservices:
