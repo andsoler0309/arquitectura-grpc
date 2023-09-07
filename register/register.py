@@ -9,10 +9,15 @@ import random
 class RegisterService(register_pb2_grpc.RegisterServiceServicer):
     def Register(self, request, context):
         # generate a random number between 0 and 100, this should be 80% greater than 10
-        if random.randint(0, 100) > 10:
-            return register_pb2.RegisterResponse(code=200, message="success")
+        try: 
+            if random.randint(0, 100) > 10:
+                return register_pb2.RegisterResponse(code=200, message="success")
+            else:
+                raise Exception("Internal server error")
+        except Exception as e:
+            return register_pb2.RegisterResponse(code=500, message=str(e))
+        
 
-        return register_pb2.RegisterResponse(code=500, message="error")
 
 
 def serve():
