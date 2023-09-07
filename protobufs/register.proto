@@ -1,0 +1,17 @@
+
+syntax = "proto3";
+
+message RegisterRequest {
+    int32 id = 1;
+    string name = 2;
+}
+
+message RegisterResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+service RegisterService {
+    rpc Register(RegisterRequest) returns (RegisterResponse);
+}
+
